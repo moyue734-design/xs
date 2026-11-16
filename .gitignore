@@ -37,3 +37,10 @@ $RECYCLE.BIN/
 .env
 .env.local
 .env.*.local
+
+# .NET Build Artifacts
+bin/
+obj/
+*.user
+*.suo
+

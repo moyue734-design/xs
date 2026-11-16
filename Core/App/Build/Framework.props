@@ -1,0 +1,53 @@
+<Project>
+
+  <ItemGroup>
+    <Page Include="..\..\Framework\UI\**\*.xaml" Link="Framework\UI\%(RecursiveDir)%(Filename)%(Extension)">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="..\..\Framework\UI\**\*.cs" Link="Framework\UI\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Resource Include="..\..\Framework\UI\Icons\**\*.png"
+              Link="Framework\UI\Icons\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Resource Include="..\..\Framework\UI\Icons\app.ico"
+              Link="Framework\UI\Icons\app.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\..\Framework\Appearance\**\*.xaml" Link="Framework\Appearance\%(RecursiveDir)%(Filename)%(Extension)">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="..\..\Framework\Appearance\**\*.cs" Link="Framework\Appearance\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\..\Framework\Common\**\*.xaml" Link="Framework\Common\%(RecursiveDir)%(Filename)%(Extension)">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="..\..\Framework\Common\**\*.cs" Link="Framework\Common\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Content Include="..\..\Framework\Common\**\Resources\**\*.xdb"
+             Link="Framework\Common\%(RecursiveDir)%(Filename)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\..\Framework\User\**\*.xaml" Link="Framework\User\%(RecursiveDir)%(Filename)%(Extension)">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="..\..\Framework\User\**\*.cs" Link="Framework\User\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\..\Framework\SystemSettings\**\*.xaml" Link="Framework\SystemSettings\%(RecursiveDir)%(Filename)%(Extension)">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="..\..\Framework\SystemSettings\**\*.cs" Link="Framework\SystemSettings\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\..\Framework\Notifications\**\*.xaml" Link="Framework\Notifications\%(RecursiveDir)%(Filename)%(Extension)">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="..\..\Framework\Notifications\**\*.cs" Link="Framework\Notifications\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

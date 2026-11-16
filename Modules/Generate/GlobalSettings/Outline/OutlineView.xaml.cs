@@ -1,0 +1,16 @@
+﻿using System.Reflection;
+using System.Windows.Controls;
+
+namespace TM.Modules.Generate.GlobalSettings.Outline
+{
+    [Obfuscation(Exclude = true, ApplyToMembers = true)]
+    [Obfuscation(Feature = "no NecroBit", Exclude = false, ApplyToMembers = true)]
+    public partial class OutlineView : UserControl
+    {
+        public OutlineView(OutlineViewModel viewModel)
+        {
+            InitializeComponent();
+            DataContext = viewModel;
+        }
+    }
+}

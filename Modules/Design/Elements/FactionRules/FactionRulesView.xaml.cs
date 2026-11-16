@@ -1,0 +1,16 @@
+﻿using System.Reflection;
+using System.Windows.Controls;
+
+namespace TM.Modules.Design.Elements.FactionRules
+{
+    [Obfuscation(Exclude = true, ApplyToMembers = true)]
+    [Obfuscation(Feature = "no NecroBit", Exclude = false, ApplyToMembers = true)]
+    public partial class FactionRulesView : UserControl
+    {
+        public FactionRulesView(FactionRulesViewModel viewModel)
+        {
+            InitializeComponent();
+            DataContext = viewModel;
+        }
+    }
+}

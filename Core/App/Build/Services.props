@@ -1,0 +1,22 @@
+<Project>
+
+  <ItemGroup>
+    <Page Include="..\..\Services\**\*.xaml" Link="Services\%(RecursiveDir)%(Filename)%(Extension)">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="..\..\Services\**\*.cs" Link="Services\%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\Services\**\Resources\**\*.json" Link="Services\%(RecursiveDir)%(Filename)%(Extension)" />
+
+    <Content Include="..\..\Services\**\Resources\**\*.onnx"
+             Link="Services\%(RecursiveDir)%(Filename)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Services\**\Resources\**\vocab.txt"
+             Link="Services\%(RecursiveDir)%(Filename)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
+

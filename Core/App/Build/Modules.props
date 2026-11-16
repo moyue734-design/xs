@@ -1,0 +1,18 @@
+<Project>
+
+  <ItemGroup>
+    <Compile Remove="..\..\Modules\**\*" />
+
+    <Page Include="..\..\Modules\**\*.xaml" Link="Modules\%(RecursiveDir)%(Filename)%(Extension)">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="..\..\Modules\**\*.xaml.cs" Link="Modules\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Compile Include="..\..\Modules\**\*.cs" Exclude="..\..\Modules\**\*.xaml.cs" Link="Modules\%(RecursiveDir)%(Filename)%(Extension)" />
+
+    <EmbeddedResource Include="..\..\Modules\**\Resources\**\*.json"
+                      Link="Modules\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>
+

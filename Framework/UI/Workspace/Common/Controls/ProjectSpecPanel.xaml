@@ -1,0 +1,351 @@
+<UserControl x:Class="TM.Framework.UI.Workspace.Common.Controls.ProjectSpecPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Border Background="{DynamicResource ContentBackgroundGlass}"
+            CornerRadius="0,0,12,12"
+            Padding="12,8,12,8">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <Border Background="{DynamicResource SurfaceGlass}"
+                        CornerRadius="6"
+                        Padding="12"
+                        Margin="0,0,0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text=" 使用模板"
+                                   VerticalAlignment="Center"
+                                    Margin="0,0,12,0"
+                                   Foreground="{DynamicResource TextPrimary}"/>
+                        <ComboBox Grid.Column="1"
+                                  ItemsSource="{Binding TemplateNames}"
+                                  SelectedItem="{Binding SelectedTemplateName}"
+                                  VerticalAlignment="Center"/>
+
+                        <StackPanel Grid.Column="2"
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    Margin="12,0,0,0">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="重置默认"
+                                        Command="{Binding ResetCommand}"
+                                        Style="{DynamicResource SecondaryButtonStyle}"
+                                        Margin="0,0,12,0"/>
+                                <Button Content="保存设置"
+                                        Command="{Binding SaveCommand}"
+                                        Style="{DynamicResource PrimaryButtonStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <TextBlock Grid.ColumnSpan="3"
+                                   Text="{Binding StatusMessage}"
+                                   Foreground="{DynamicResource SuccessColor}"
+                                   FontSize="11"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   Margin="0,0,0,-18"
+                                   Panel.ZIndex="10"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding HasStatusMessage, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </Grid>
+                </Border>
+
+                <TextBlock Text="配置项目级别的写作风格和约束，所有章节生成时都会遵循这些规格。"
+                           Foreground="{DynamicResource TextSecondary}"
+                           FontSize="12"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,8"/>
+
+                <Border Background="{DynamicResource SurfaceGlass}"
+                        CornerRadius="6"
+                        Padding="16,10,16,10"
+                        Margin="0,0,0,4">
+                    <StackPanel>
+                        <TextBlock Text="写作风格"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   Margin="0,0,0,8"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" MinWidth="100"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*" MinWidth="120"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*" MinWidth="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="风格偏好"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <ComboBox IsEditable="True"
+                                          Text="{Binding WritingStyle, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{Binding WritingStyleOptions}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="叙事视角"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <ComboBox SelectedValue="{Binding Pov}"
+                                          SelectedValuePath="Content">
+                                    <ComboBoxItem Content="第一人称"/>
+                                    <ComboBoxItem Content="第三人称限知"/>
+                                    <ComboBoxItem Content="第三人称全知"/>
+                                    <ComboBoxItem Content="多视角"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="4">
+                                <TextBlock Text="语气基调"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <ComboBox IsEditable="True"
+                                          Text="{Binding Tone, UpdateSourceTrigger=PropertyChanged}"
+                                          ItemsSource="{Binding ToneOptions}"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{DynamicResource SurfaceGlass}"
+                        CornerRadius="6"
+                        Padding="16,10,16,10"
+                        Margin="0,0,0,4">
+                    <StackPanel>
+                        <TextBlock Text="格式约束"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   Margin="0,0,0,8"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="目标字数"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding TargetWordCount, UpdateSourceTrigger=PropertyChanged}"
+                                             VerticalContentAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" Text="字"
+                                               VerticalAlignment="Center"
+                                               Margin="6,0,0,0"
+                                               Foreground="{DynamicResource TextSecondary}"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="段落长度"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding ParagraphLength, UpdateSourceTrigger=PropertyChanged}"
+                                             VerticalContentAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" Text="字/段"
+                                               VerticalAlignment="Center"
+                                               Margin="6,0,0,0"
+                                               Foreground="{DynamicResource TextSecondary}"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="4">
+                                <TextBlock Text="对话比例"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid VerticalAlignment="Center">
+                                        <Slider Minimum="0" Maximum="100"
+                                                Value="{Binding DialogueRatioPercent}"/>
+                                        <TextBlock Text="{Binding DialogueRatioPercent, StringFormat={}{0:F0}%}"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{DynamicResource TextPrimary}"
+                                                   FontSize="11"
+                                                   IsHitTestVisible="False"/>
+                                    </Grid>
+                                    <TextBox Grid.Column="1"
+                                             Text="{Binding DialogueRatioPercent, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:F0}}"
+                                             VerticalContentAlignment="Center"
+                                             HorizontalContentAlignment="Center"
+                                             Margin="6,0,0,0"/>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{DynamicResource SurfaceGlass}"
+                        CornerRadius="6"
+                        Padding="16,10,16,10"
+                        Margin="0,0,0,4">
+                    <StackPanel>
+                        <TextBlock Text="内容约束"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   Margin="0,0,0,8"/>
+
+                        <TextBlock Text="必须包含的元素（用逗号分隔）"
+                                   Foreground="{DynamicResource TextSecondary}"
+                                   FontSize="12"
+                                   Margin="0,0,0,4"/>
+                        <TextBox Text="{Binding MustIncludeText, UpdateSourceTrigger=PropertyChanged}"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 MinHeight="40"
+                                 MaxHeight="80"
+                                 VerticalScrollBarVisibility="Auto"
+                                 Margin="0,0,0,12"/>
+
+                        <TextBlock Text="必须避免的内容（用逗号分隔）"
+                                   Foreground="{DynamicResource TextSecondary}"
+                                   FontSize="12"
+                                   Margin="0,0,0,4"/>
+                        <TextBox Text="{Binding MustAvoidText, UpdateSourceTrigger=PropertyChanged}"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 MinHeight="40"
+                                 MaxHeight="80"
+                                 VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{DynamicResource SurfaceGlass}"
+                        CornerRadius="6"
+                        Padding="16,10,16,10"
+                        Margin="0,0,0,4">
+                    <StackPanel>
+                        <TextBlock Text="文风范例（防文风漂移锚点）"
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   Margin="0,0,0,4"/>
+                        <TextBlock Text="建议粘贴 2~3 段你最满意的正文样本（约 300~800 字，包含对话、动作与环境描写）。AI 将以它为文风基准，防止越写越像“摘要体”或 AI 腔。"
+                                   Foreground="{DynamicResource TextSecondary}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,8"/>
+                        <TextBox Text="{Binding StyleExemplars, UpdateSourceTrigger=PropertyChanged}"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 MinHeight="88"
+                                 MaxHeight="180"
+                                 VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="{DynamicResource SurfaceGlass}"
+                        CornerRadius="6"
+                        Padding="16,10,16,10"
+                        Margin="0,0,0,0">
+                    <StackPanel>
+                        <DockPanel Margin="0,0,0,8" LastChildFill="False">
+                            <TextBlock Text="润色模式"
+                                       DockPanel.Dock="Left"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextPrimary}"
+                                       VerticalAlignment="Center"/>
+                            <Button DockPanel.Dock="Right"
+                                    Content="功能注释"
+                                    Height="24" MinWidth="80"
+                                    Padding="10,2"
+                                    FontSize="12"
+                                    Click="OnPolishHelpClick"/>
+                        </DockPanel>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="字数控制"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <ComboBox SelectedIndex="{Binding WordCountControl, Mode=TwoWay}">
+                                    <ComboBoxItem Content="关闭"/>
+                                    <ComboBoxItem Content="全局补偿"/>
+                                    <ComboBoxItem Content="全局免检"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="润色控制"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <ComboBox SelectedIndex="{Binding PolishControl, Mode=TwoWay}">
+                                    <ComboBoxItem Content="使用原文"/>
+                                    <ComboBoxItem Content="正则降级"/>
+                                    <ComboBoxItem Content="终止落盘"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="4">
+                                <TextBlock Text="润色次数"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <ComboBox SelectedIndex="{Binding PolishMode, Mode=TwoWay}">
+                                    <ComboBoxItem Content="关闭润色"/>
+                                    <ComboBoxItem Content="一次润色"/>
+                                    <ComboBoxItem Content="二次润色"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="6">
+                                <TextBlock Text="润色模型"
+                                           Foreground="{DynamicResource TextSecondary}"
+                                           FontSize="12"
+                                           Margin="0,0,0,6"/>
+                                <ComboBox SelectedIndex="{Binding PolishModel, Mode=TwoWay}">
+                                    <ComboBoxItem Content="本地正则"/>
+                                    <ComboBoxItem Content="在线润色"/>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
+</UserControl>
